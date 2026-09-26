@@ -1,0 +1,62 @@
+{
+  "name": "zenox-router",
+  "version": "0.1.0",
+  "description": "OpenCode plugin that classifies each request with Jev (TypeSafe's decision model on OpenRouter) and routes it to the best model across your configured providers, with health/budget-aware fallback cascades.",
+  "author": "Ayush",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "zenox-router": "./dist/cli/index.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "bun build src/index.ts --outdir dist --target bun --format esm --external @opencode-ai/plugin --external @opencode/plugin && bun build src/cli/index.ts --outdir dist/cli --target node --format esm && tsc --emitDeclarationOnly",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "bun run clean && bun run build",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test test/",
+    "eval": "bun run eval/run-eval.ts"
+  },
+  "keywords": [
+    "zenox",
+    "zenox-router",
+    "opencode",
+    "opencode-plugin",
+    "router",
+    "model-router",
+    "jev",
+    "openrouter",
+    "llm",
+    "ai"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CYBERBOYAYUSH/zenox-router.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.11.0",
+    "@opencode-ai/plugin": "^1.18.13",
+    "@opencode/plugin": "^2.0.0",
+    "commander": "^14.0.0",
+    "picocolors": "^1.1.1",
+    "strip-json-comments": "^5.0.3",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "bun-types": "latest",
+    "typescript": "^5.7.3"
+  }
+}
